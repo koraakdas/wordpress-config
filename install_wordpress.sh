@@ -35,7 +35,7 @@ sed -i "s/dbhostname/${dbhostname}/g" wp-config.php;
 cp wp-config.php /var/www/html;
 chown -R apache:apache /var/www/html/wp-config;
 chmod 775 /var/www/html/wp-config;
-
+}
 
 # calling function
 install_wordpress
