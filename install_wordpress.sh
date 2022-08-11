@@ -26,7 +26,7 @@ dbhostname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-
 
 #Passing Values to wordpress config file
 
-cd aws-wordpress-appconfig/;
+cd wordpress-config/;
 sed -i "s/dbname/${dbname}/g" wp-config.php;
 sed -i "s/username/${username}/g" wp-config.php;
 sed -i "s/password/${password}/g" wp-config.php;
