@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # using a function so that commands will work when executed in sub shell
-function deploy_wordpress() {
+function install_wordpress() {
 
 yum update -y;
 yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip;
@@ -34,4 +34,8 @@ sed -i "s/dbhostname/${dbhostname}/g" wp-config.php;
 
 cp wp-config.php /var/www/html;
 chown -R apache:apache /var/www/html/wp-config;
-chmod 775 /var/www/html/wp-config
+chmod 775 /var/www/html/wp-config;
+
+
+# calling funcrion
+install_wordpress
