@@ -37,5 +37,5 @@ chown -R apache:apache /var/www/html/wp-config;
 chmod 775 /var/www/html/wp-config;
 
 
-# calling funcrion
+# calling function
 install_wordpress
