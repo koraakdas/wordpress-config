@@ -32,7 +32,7 @@ sudo sed -i "s/password/${password}/g" wp-config.php;
 sudo sed -i "s/dbhostname/${dbhostname}/g" wp-config.php;
 
 sudo cd wordpress-config/;
-cp wp-config.php /var/www/html;
+sudo cp wp-config.php /var/www/html;
 sudo cp -r wordpress/*  /var/www/html/;
 sudo chown -R apache:apache /var/www/;
 sudo chmod -Rf 775  /var/www/;
