@@ -6,7 +6,6 @@ function install_wordpress() {
 sudo yum update -y;
 sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip;
 sudo systemctl enable httpd;
-sudo cd wordpress-config/;
 sudo wget https://wordpress.org/latest.tar.gz;
 sudo tar -xvf latest.tar.gz;
 sudo cp -r wordpress/*  /var/www/html/;
@@ -32,9 +31,13 @@ sudo sed -i "s/username/${username}/g" wp-config.php;
 sudo sed -i "s/password/${password}/g" wp-config.php;
 sudo sed -i "s/dbhostname/${dbhostname}/g" wp-config.php;
 
+sudo cd wordpress-config/;
 cp wp-config.php /var/www/html;
-chown -R apache:apache /var/www/html/wp-config;
-chmod 775 /var/www/html/wp-config;
+sudo cp -r wordpress/*  /var/www/html/;
+sudo chown -R apache:apache /var/www/;
+sudo chmod -Rf 775  /var/www/;
+sudo setenforce 0;
+
 }
 
 # calling function
