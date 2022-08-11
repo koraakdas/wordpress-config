@@ -4,7 +4,7 @@
 function install_wordpress() {
 
 sudo yum update -y;
-sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip;
+sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip jq;
 sudo systemctl enable httpd;
 sudo wget https://wordpress.org/latest.tar.gz;
 sudo tar -xvf latest.tar.gz;
