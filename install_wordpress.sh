@@ -8,10 +8,6 @@ sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip j
 sudo systemctl enable httpd;
 sudo wget https://wordpress.org/latest.tar.gz;
 sudo tar -xvf latest.tar.gz;
-sudo wget "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip";
-sudo unzip awscli-exe-linux-x86_64.zip;
-sudo bash ./aws/install;
-sudo export PATH=$PATH:/usr/local/bin;
 
 #Storing variables
 password=$(aws secretsmanager get-secret-value --secret-id MysqldbCreds --query 'SecretString' --output json | jq -r | jq .password | tr -d) 
@@ -21,6 +17,7 @@ dbhostname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-
 
 #Passing Values to wordpress config file
 
+cd wordpress-config/;
 sudo sed -i "s/dbname/${dbname}/g" wp-config.php;
 sudo sed -i "s/username/${username}/g" wp-config.php;
 sudo sed -i "s/password/${password}/g" wp-config.php;
