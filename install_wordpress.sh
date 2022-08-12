@@ -11,7 +11,7 @@ sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip j
 sudo systemctl enable httpd;
 
 #Storing variables
-password=$(aws secretsmanager get-secret-value --secret-id MysqldbCreds --query 'SecretString' --output json | jq -r | jq .password | tr -d) 
+password=$(aws secretsmanager get-secret-value --secret-id MysqldbCreds --query 'SecretString' --output text | jq .password | tr -d \") 
 dbname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .DBName | tr -d \")
 username=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .MasterUsername | tr -d \")
 dbhostname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .Endpoint.Address | tr -d \")
