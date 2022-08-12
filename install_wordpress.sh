@@ -18,10 +18,10 @@ dbhostname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-
 
 #Passing Values to wordpress config file
 cd wordpress-config/;
-sudo sed -i "s/dbname/${dbname}/g" wp-config.php;
-sudo sed -i "s/username/${username}/g" wp-config.php;
-sudo sed -i "s/password/${password}/g" wp-config.php;
-sudo sed -i "s/dbhostname/${dbhostname}/g" wp-config.php;
+sudo sed -i "s/db_name/${dbname}/g" wp-config.php;
+sudo sed -i "s/db_username/${username}/g" wp-config.php;
+sudo sed -i "s/db_password/${password}/g" wp-config.php;
+sudo sed -i "s/db_hostname/${dbhostname}/g" wp-config.php;
 
 #Installing Wordpress
 sudo wget https://wordpress.org/latest.tar.gz;
