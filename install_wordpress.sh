@@ -7,8 +7,10 @@ function install_wordpress() {
 export AWS_DEFAULT_REGION=us-east-1;
 
 sudo yum update -y;
-sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip jq;
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2;
+sudo yum install -y httpd;
 sudo systemctl enable httpd;
+
 
 #Storing variables
 password=$(aws secretsmanager get-secret-value --secret-id MysqldbCreds --query 'SecretString' --output text | jq .password | tr -d \") 
