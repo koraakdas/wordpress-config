@@ -3,6 +3,9 @@
 # using a function so that commands will work when executed in sub shell
 function install_wordpress() {
 
+#AWS CLI Environment Variables
+export AWS_DEFAULT_REGION=us-east-1;
+
 sudo yum update -y;
 sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip jq;
 sudo systemctl enable httpd;
