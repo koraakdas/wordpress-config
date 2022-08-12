@@ -8,7 +8,7 @@ export AWS_DEFAULT_REGION=us-east-1;
 
 sudo yum update -y;
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2;
-sudo yum install -y httpd;
+sudo yum install -y httpd jq;
 sudo systemctl enable httpd;
 
 
