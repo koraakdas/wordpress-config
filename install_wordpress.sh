@@ -6,8 +6,6 @@ function install_wordpress() {
 sudo yum update -y;
 sudo yum install -y httpd wget php-fpm php-mysqli php-json php php-devel unzip jq;
 sudo systemctl enable httpd;
-sudo wget https://wordpress.org/latest.tar.gz;
-sudo tar -xvf latest.tar.gz;
 
 #Storing variables
 password=$(aws secretsmanager get-secret-value --secret-id MysqldbCreds --query 'SecretString' --output json | jq -r | jq .password | tr -d) 
@@ -16,12 +14,22 @@ username=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-in
 dbhostname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .Endpoint.Address | tr -d \")
 
 #Passing Values to wordpress config file
-
 cd wordpress-config/;
 sudo sed -i "s/dbname/${dbname}/g" wp-config.php;
 sudo sed -i "s/username/${username}/g" wp-config.php;
 sudo sed -i "s/password/${password}/g" wp-config.php;
 sudo sed -i "s/dbhostname/${dbhostname}/g" wp-config.php;
+
+#Installing Wordpress
+sudo wget https://wordpress.org/latest.tar.gz;
+sudo tar -xvf latest.tar.gz;
+sudp cp readme.html /var/www/html;
+sudo cp wp-config.php /var/www/html;
+sudo cp -r wordpress/*  /var/www/html/;
+sudo chown -R apache:apache /var/www/;
+sudo chmod -Rf 775  /var/www/;
+sudo setenforce 0;
+sudo systemctl restart httpd;
 
 }
 
