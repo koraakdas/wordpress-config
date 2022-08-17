@@ -14,9 +14,9 @@ sudo systemctl enable httpd;
 
 #Storing variables
 password=$(aws secretsmanager get-secret-value --secret-id MysqldbCreds --query 'SecretString' --output text | jq .password | tr -d \") 
-dbname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .DBName | tr -d \")
-username=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .MasterUsername | tr -d \")
-dbhostname=$(aws rds describe-db-instances --db-instance-identifier rds-mariadb-instance --query DBInstances[0] --output json | jq .Endpoint.Address | tr -d \")
+dbname=$(aws rds describe-db-instances --db-instance-identifier mariadb-server --query DBInstances[0] --output json | jq .DBName | tr -d \")
+username=$(aws rds describe-db-instances --db-instance-identifier mariadb-server --query DBInstances[0] --output json | jq .MasterUsername | tr -d \")
+dbhostname=$(aws rds describe-db-instances --db-instance-identifier mariadb-server --query DBInstances[0] --output json | jq .Endpoint.Address | tr -d \")
 
 #Passing Values to wordpress config file
 cd wordpress-config/;
